@@ -1,0 +1,29 @@
+{
+  "name": "walle",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start-dev": "nodemon ./src/index.js",
+    "event-logging": "nodemon ./src/events/logging_events",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ascii-table": "0.0.9",
+    "cli-color": "^2.0.0",
+    "discord-buttons": "^4.0.0",
+    "discord.js": "^12.5.1",
+    "dotenv": "^8.2.0",
+    "js-yaml": "^4.1.0",
+    "moment": "^2.29.1",
+    "moment-duration-format": "^2.3.2",
+    "node-fetch": "^2.6.1",
+    "nodemon": "^2.0.7",
+    "pg": "^8.5.1",
+    "pidusage": "^2.0.21",
+    "require-dir": "^1.2.0",
+    "util": "^0.12.3"
+  }
+}
