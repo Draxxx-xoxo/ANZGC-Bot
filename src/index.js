@@ -97,7 +97,7 @@ discordClient.on('guildMemberAdd', async (member) => {
 	
     const channelId = json.welcomeChannel
 	const channel = member.guild.channels.cache.get(channelId)
-	channel.send('@' + member.user.tag + ' has joined the server <@&' + json.Roles.ThePride + '> <@&' + json.Roles.RecruitingTeam + '>', {embed: embed});
+	channel.send('<@' + member.user.id + '> has joined the server <@&' + json.Roles.ThePride + '> <@&' + json.Roles.RecruitingTeam + '>', {embed: embed});
 	member.roles.add(json.Roles.DropZone)
 	member.send(
 	`Hello! Welcome to ANZGC. Please standby for one of our Recruiters to assist you in finding the best club for you.+
