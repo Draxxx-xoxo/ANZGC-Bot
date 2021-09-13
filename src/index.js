@@ -86,6 +86,8 @@ discordClient.on('guildMemberRemove', async (member) => {
 })
   
 discordClient.on('guildMemberAdd', async (member) => {
+
+	if(member.user.bot) return;
 	
 	const embed = new Discord.MessageEmbed()
 	.setTitle('Welcome to the ANZGC Disney Arena server!')
@@ -112,7 +114,7 @@ Only Members of ANZGC Members from Star Wars Galaxy of Heroes and Marvel Strike 
 Please DM <@716206954313285713> if you are not able to see any channels in our DSA Server
 
 Hope you find a club that suits your needs
-	`)
+	`).catch(() => console.log("Can't send DM to your user!"));
 
 })
 
