@@ -1,6 +1,9 @@
 {
   "name": "walle",
   "version": "1.0.0",
+  "engines": {
+    "node": "16.10.0"
+  },
   "description": "",
   "main": "src/index.js",
   "scripts": {
