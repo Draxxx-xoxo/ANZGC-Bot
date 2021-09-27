@@ -2,7 +2,7 @@ require('dotenv').config();
 const fs = require('fs');
 const {Client, Intents} = require('discord.js');
 const Discord = require('discord.js');
-const discordClient = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.DIRECT_MESSAGES, Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const discordClient = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.DIRECT_MESSAGES, Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS] });
 const json = require('../config.json')
 discordClient.commands = new Discord.Collection();
 
@@ -82,10 +82,6 @@ discordClient.on('messageCreate', async message => {
 	}
 });
 
-discordClient.on('guildMemberRemove', async (member) => {
-
-})
-  
 discordClient.on('guildMemberAdd', async (member) => {
 
 	if(member.user.bot) return;
@@ -103,7 +99,7 @@ discordClient.on('guildMemberAdd', async (member) => {
 	channel.send({content:'<@' + member.user.id + '> has joined the server <@&' + json.Roles.ThePride + '> <@&' + json.Roles.RecruitingTeam + '>', embeds: [embed]});
 	member.roles.add(json.Roles.DropZone)
 	member.send({content:
-	`Hello! Welcome to ANZGC. Please standby for one of our Recruiters to assist you in finding the best club for you.+
+	`Hello! Welcome to ANZGC. Please standby for one of our Recruiters to assist you in finding the best club for you.
 
 **In the meantime, please**
 1) Post your profile in <#${json.welcomeChannel}>
@@ -116,6 +112,7 @@ Please DM <@716206954313285713> if you are not able to see any channels in our D
 
 Hope you find a club that suits your needs
 	`}).catch(() => console.log("Can't send DM to your user!"));
+	
 
 })
 
