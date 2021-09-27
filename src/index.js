@@ -1,7 +1,8 @@
 require('dotenv').config(); 
 const fs = require('fs');
+const {Client, Intents} = require('discord.js');
 const Discord = require('discord.js');
-const discordClient = new Discord.Client();
+const discordClient = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.DIRECT_MESSAGES, Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const json = require('../config.json')
 discordClient.commands = new Discord.Collection();
 
@@ -31,7 +32,7 @@ discordClient.once('ready', async () => {
 });
 
 //COMMANDS
-discordClient.on('message',async message => {
+discordClient.on('messageCreate', async message => {
 
 	const prefix = '!'
 
@@ -99,9 +100,9 @@ discordClient.on('guildMemberAdd', async (member) => {
 	
     const channelId = json.welcomeChannel
 	const channel = member.guild.channels.cache.get(channelId)
-	channel.send('<@' + member.user.id + '> has joined the server <@&' + json.Roles.ThePride + '> <@&' + json.Roles.RecruitingTeam + '>', {embed: embed});
+	channel.send({content:'<@' + member.user.id + '> has joined the server <@&' + json.Roles.ThePride + '> <@&' + json.Roles.RecruitingTeam + '>', embeds: [embed]});
 	member.roles.add(json.Roles.DropZone)
-	member.send(
+	member.send({content:
 	`Hello! Welcome to ANZGC. Please standby for one of our Recruiters to assist you in finding the best club for you.+
 
 **In the meantime, please**
@@ -114,7 +115,7 @@ Only Members of ANZGC Members from Star Wars Galaxy of Heroes and Marvel Strike 
 Please DM <@716206954313285713> if you are not able to see any channels in our DSA Server
 
 Hope you find a club that suits your needs
-	`).catch(() => console.log("Can't send DM to your user!"));
+	`}).catch(() => console.log("Can't send DM to your user!"));
 
 })
 

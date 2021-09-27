@@ -6,11 +6,11 @@ module.exports = {
         try{
             var result = message.content.split(" ").slice(1).join(" ")
             let evaled = eval(result);
-            message.channel.send('```'+ evaled + '```')
+            message.channel.send({content:'```'+ evaled + '```'})
             }
         catch(error){
             console.log(error);
-            message.channel.send('```'+ error + '```');
+            message.channel.send({content: '```'+ error + '```'});
         }
 	},
 };
