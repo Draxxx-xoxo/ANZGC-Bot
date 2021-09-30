@@ -9,5 +9,12 @@
     },
 
     "guildID": "695633766575636491",
-    "welcomeChannel": "695633768433582251"
+    "welcomeChannel": "695633768433582251",
+
+    "addmemberembed":{
+        "Title": "Welcome to the ANZGC Disney Arena server!",
+        "Description": "You only have the drop zone channel available at this stage.\n\nPlease standby for one of our team to arrive and assist you. Meanwhile say hello, post your DSA profile and tell us what you are looking for"
+    },
+
+    "dmcontent": "Hello! Welcome to ANZGC. Please standby for one of our Recruiters to assist you in finding the best club for you.\n\n**In the meantime, please**\n1) Post your profile in <#695633768433582251>\n2) Tell us what you are looking for in a club \n\n**If you are looking to access our Server:**\nOnly Members of ANZGC Members from Star Wars Galaxy of Heroes and Marvel Strike Force are allowed to have the friends role and other players will be decided by The Pride.\n\nPlease DM <@716206954313285713> if you are not able to see any channels in our DSA Server\n\nHope you find a club that suits your needs"
 }

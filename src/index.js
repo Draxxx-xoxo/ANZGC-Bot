@@ -85,34 +85,20 @@ discordClient.on('messageCreate', async message => {
 discordClient.on('guildMemberAdd', async (member) => {
 
 	if(member.user.bot) return;
+
+	if(json.welcomeChannel == member.guild.channels.cache(json.welcomeChannel)){
 	
 	const embed = new Discord.MessageEmbed()
-	.setTitle('Welcome to the ANZGC Disney Arena server!')
-	.setDescription(`You only have the drop zone channel available at this stage.
-
-	Please standby for one of our team to arrive and assist you. Meanwhile say hello, post your DSA profile and tell us what you are looking for
-	`)
+	.setTitle(json.addmemberembed.Title)
+	.setDescription(json.addmemberembed.Description)
 	.setThumbnail('https://images-ext-2.discordapp.net/external/ZcnQRqa7obo0-DZA1-ZC-YHPxTm0iB6QedF20o28WqE/https/media.discordapp.net/attachments/695952520614379550/695954117637439539/Screenshot_20200405-001249_Gallery.jpg')
 	
     const channelId = json.welcomeChannel
 	const channel = member.guild.channels.cache.get(channelId)
 	channel.send({content:'<@' + member.user.id + '> has joined the server <@&' + json.Roles.ThePride + '> <@&' + json.Roles.RecruitingTeam + '>', embeds: [embed]});
 	member.roles.add(json.Roles.DropZone)
-	member.send({content:
-	`Hello! Welcome to ANZGC. Please standby for one of our Recruiters to assist you in finding the best club for you.
-
-**In the meantime, please**
-1) Post your profile in <#${json.welcomeChannel}>
-2) Tell us what you are looking for in a club 
-
-**If you are looking to access our Server:**
-Only Members of ANZGC Members from Star Wars Galaxy of Heroes and Marvel Strike Force are allowed to have the friends role and other players will be decided by The Pride.
-
-Please DM <@716206954313285713> if you are not able to see any channels in our DSA Server
-
-Hope you find a club that suits your needs
-	`}).catch(() => console.log("Can't send DM to your user!"));
-	
+	member.send({content: json.dmcontent}).catch(() => console.log("Can't send DM to your user!"));
+	}
 
 })
 
