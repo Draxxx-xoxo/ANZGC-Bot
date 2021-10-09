@@ -86,7 +86,7 @@ discordClient.on('guildMemberAdd', async (member) => {
 
 	if(member.user.bot) return;
 
-	if(json.welcomeChannel == member.guild.channels.cache(json.welcomeChannel)){
+	if(json.welcomeChannel == member.guild.channels.cache.get(json.welcomeChannel)){
 	
 	const embed = new Discord.MessageEmbed()
 	.setTitle(json.addmemberembed.Title)
