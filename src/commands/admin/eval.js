@@ -14,3 +14,15 @@ module.exports = {
         }
 	},
 };
+
+const { SlashCommandBuilder } = require('@discordjs/builders');
+
+module.exports = {
+     data: new SlashCommandBuilder()
+	    .setName('eval')
+	    .setDescription('evaluation')
+	    .addStringOption(option =>
+		    option.setName('input')
+			    .setDescription('evaluation')
+			    .setRequired(true))
+}

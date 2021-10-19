@@ -29,3 +29,16 @@ module.exports = {
         message.channel.send({embeds: [embed]})
 	},
 };
+
+
+const { SlashCommandBuilder } = require('@discordjs/builders');
+
+module.exports = {
+    data: new SlashCommandBuilder()
+    .setName('list_role')
+    .setDescription('Returns all the members with that role')
+    .addStringOption(option =>
+        option.setName('role')
+            .setDescription('role')
+            .setRequired(true))
+};

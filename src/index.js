@@ -5,6 +5,8 @@ const Discord = require('discord.js');
 const discordClient = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.DIRECT_MESSAGES, Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS] });
 const json = require('../config.json')
 discordClient.commands = new Discord.Collection();
+const slash_command = require('./slash_command')
+const wait = require('util').promisify(setTimeout);
 
 
 
@@ -17,7 +19,6 @@ for (const folder of commandFolders) {
 		discordClient.commands.set(command.name, command);
 	}
 }
-
 
 discordClient.once('ready', async () => {
 		console.log(
@@ -101,5 +102,52 @@ discordClient.on('guildMemberAdd', async (member) => {
 	}
 
 })
+discordClient.on('interactionCreate', async interaction => {
+	if (!interaction.isCommand()) return;
+
+	if (interaction.commandName === 'ping') {
+		await interaction.reply('Loading Data')
+		await wait(0)
+		await interaction.editReply(`🏓Latency is ${new Date() - interaction.createdTimestamp}ms. API Latency is ${Math.round(discordClient.ws.ping)}ms`);
+	}
+
+	if (interaction.commandName === 'eval') {
+
+		try{
+			const result = interaction.options.getString('input').split(" ").join(" ");
+            let evaled = eval(result);
+            await interaction.reply({content:'```'+ evaled + '```'})
+            }
+        catch(error){
+            console.log(error);
+            interaction.reply({content: '```'+ error + '```'});
+		}
+		
+	}
+
+	if (interaction.commandName === 'list_role') {
+
+		const role = interaction.guild.roles.cache.get(interaction.options.getString('role'))
+
+		//console.log(interaction.options.getNumber('role'))
+
+		if(!role){
+			await interaction.reply('Please mention a role')
+			return
+		}
+
+		const list_role = role.members.map(m=>m.user.tag + ' `' + m.user.id + '`').join('\n')
+
+		const embed = new Discord.MessageEmbed()
+		.setTitle('Members who have ' + role.name)
+		.setDescription(list_role)
+		.setFooter(interaction.guild.roles.cache.get(`${role.id}`).members.map(m=>m).length + ' Members with the role')
+		
+        
+        interaction.reply({embeds: [embed]})
+	}
+
+
+});
 
 discordClient.login(process.env.TOKEN)
