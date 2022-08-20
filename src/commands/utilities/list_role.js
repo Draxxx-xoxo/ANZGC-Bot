@@ -6,7 +6,7 @@ module.exports = {
 	description: "Returns bot and API latency in milliseconds.",
 	execute: async (message, args, client) => {
 
-        const role = message.guild.roles.cache.get(args[0]) || message.guild.roles.cache.find(r => r.name === args.join(" ")) || message.mentions.roles.first()
+        const role = message.guild.roles.fetch(args[0]) || message.guild.roles.cache.find(r => r.name === args.join(" ")) || message.mentions.roles.first()
         
         if (!role) {
             return message.reply(`Please mention a role.`);
@@ -18,7 +18,7 @@ module.exports = {
             return message.reply(`I cant find that role!`);
         }
 
-        const list_role = message.guild.roles.cache.get(`${role.id}`).members.map(m=>m.user.tag + ' `' + m.user.id + '`').join('\n')
+        const list_role = message.guild.roles.fetch(`${role.id}`).members.map(m=>m.user.tag + ' `' + m.user.id + '`').join('\n')
 
 		const embed = new MessageEmbed()
 		.setTitle('Members who have ' + role.name)
